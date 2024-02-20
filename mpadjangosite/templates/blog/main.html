@@ -1,0 +1,48 @@
+{%extends 'blog/base.html'%}
+{%block title%}Главная{%endblock%}
+{%block content%}
+<section class="list-posts">
+    <div class="container">
+        {%if posts%}
+        <h1 class="my-4 text-center">Последние записи</h1>
+        {%endif%}
+        {%if posts.count == 1%}
+        <div class="row justify-content-center">
+            {%else%}
+            <div class="row">
+                {%endif%}
+                {%for post in posts%}
+                {%if posts.count == 1%}
+                <div class="col-md-6">
+                    {%elif posts.count == 2%}
+                    <div class="col-md-6">
+                        {%else%}
+                        <div class="col-md-4">
+                            {%endif%}
+                            <div class="card mb-4 shadow-sm">
+                                {%if post.images.all.count != 0 %}
+                                <img src="{{post.images.first.image.url}}" class="card-img-top">
+                                {%endif%}
+                                <div class="card-body">
+                                    <h4 class="card-title">{{post.title}}</h4>
+                                    <p class="card-text">{{post.text}}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <a href="{{post.get_absolute_url}}"
+                                                class="btn btn-sm btn-outline-secondary">Подробнее</a>
+                                        </div>
+                                        <small class="text-muted">{{post.created_date}}</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {%empty%}
+                        <h1 class="my-4 text-center">Записей нет.</h1>
+                        {%endfor%}
+                    </div>
+                </div>
+</section>
+{%endblock%}
+{%block pagination%}
+{%include '../block/pagination.html'%}
+{%endblock%}
