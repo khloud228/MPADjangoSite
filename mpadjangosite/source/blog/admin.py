@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Post, Image
+from .models import Post
 
 
 @admin.register(Post)
@@ -9,12 +9,7 @@ class PostAdmin(admin.ModelAdmin):
         "title",
         "created_date",
         "last_modified",
-        "fixed",
         "published",
+        "tag"
     )
     prepopulated_fields = {"slug": ("title",)}
-
-
-@admin.register(Image)
-class ImageAdmin(admin.ModelAdmin):
-    pass

@@ -1,4 +1,4 @@
-{%extends 'blog/base.html'%}
+{%extends 'base.html'%}
 {%block title%}{{post.title}}{%endblock%}
 {%block content%}
 <section class="my-post-detail">
@@ -12,146 +12,29 @@
                         <li class="breadcrumb-item">
                             <a href="{%url 'blog:main'%}">Главная</a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Пост 1</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{post.title}}</li>
                     </ol>
                 </nav>
                 <!-- Тело поста -->
-                <img src="./img/dog.jpg" alt="post img" class="img-fluid rounded">
+                <img src="{{post.image.url}}" alt="post img" class="img-fluid rounded">
                 <hr>
-                <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam accusantium
-                    iusto voluptates
-                    exercitationem. Obcaecati, alias possimus! Tempora quasi rem molestiae deserunt illum esse,
-                    asperiores temporibus vel sapiente vero debitis quibusdam.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam accusantium iusto voluptates
-                    exercitationem. Obcaecati, alias possimus! Tempora quasi rem molestiae deserunt illum esse,
-                    asperiores temporibus vel sapiente vero debitis quibusdam.</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam accusantium iusto voluptates
-                    exercitationem. Obcaecati, alias possimus! Tempora quasi rem molestiae deserunt illum esse,
-                    asperiores temporibus vel sapiente vero debitis quibusdam.</p>
+                <p class="lead">{{post.text|safe}}</p>
                 <div class="d-flex justify-content-end">
                     <div class="badge text-bg-info me-1">#Животные</div>
                     <div class="badge text-bg-info">#Tag2</div>
                 </div>
                 <hr>
                 <div class="d-flex justify-content-between">
-                    <div class="lead">Автор: ????? ?????</div>
-                    <div>Опубликовано: ??????</div>
+                    <div class="lead">Автор: {{post.author}}</div>
+                    <div>Опубликовано: {{post.created_date}}</div>
                 </div>
                 <hr>
-                <div class="card my-4">
-                    <div class="card-header">Прокомментируй:</div>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <textarea class="form-control mb-3" rows="3"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">Отправить</button>
-                        </form>
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="flex-shrink-0">
-                        <img class="rounded-circle" src="http://placehold.it/50x50" alt="Аватар">
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                        <h5 class="mt-0">Имя комментатора</h5>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus esse consequuntur maiores
-                        atque tempore unde ullam iste similique autem, voluptate quaerat et fugit eum magni quia
-                        deleniti, quod nesciunt doloremque. Aliquid laborum consequuntur fugiat reiciendis voluptas
-                        eligendi voluptate, ex numquam assumenda, id pariatur quod quaerat vero. Aspernatur,
-                        voluptates veniam? Atque.
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="flex-shrink-0">
-                        <img class="rounded-circle" src="http://placehold.it/50x50" alt="Аватар">
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                        <h5 class="mt-0">Имя комментатора</h5>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus esse consequuntur maiores
-                        atque tempore unde ullam iste similique autem, voluptate quaerat et fugit eum magni quia
-                        deleniti, quod nesciunt doloremque. Aliquid laborum consequuntur fugiat reiciendis voluptas
-                        eligendi voluptate, ex numquam assumenda, id pariatur quod quaerat vero. Aspernatur,
-                        voluptates veniam? Atque.
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="flex-shrink-0">
-                        <img class="rounded-circle" src="http://placehold.it/50x50" alt="Аватар">
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                        <h5 class="mt-0">Имя комментатора</h5>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus esse consequuntur maiores
-                        atque tempore unde ullam iste similique autem, voluptate quaerat et fugit eum magni quia
-                        deleniti, quod nesciunt doloremque. Aliquid laborum consequuntur fugiat reiciendis voluptas
-                        eligendi voluptate, ex numquam assumenda, id pariatur quod quaerat vero. Aspernatur,
-                        voluptates veniam? Atque.
-                    </div>
-                </div>
-                <div class="d-flex">
-                    <div class="flex-shrink-0">
-                        <img class="rounded-circle" src="http://placehold.it/50x50" alt="Аватар">
-                    </div>
-                    <div class="flex-grow-1 ms-3">
-                        <h5 class="mt-0">Имя комментатора</h5>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus esse consequuntur maiores
-                        atque tempore unde ullam iste similique autem, voluptate quaerat et fugit eum magni quia
-                        deleniti, quod nesciunt doloremque. Aliquid laborum consequuntur fugiat reiciendis voluptas
-                        eligendi voluptate, ex numquam assumenda, id pariatur quod quaerat vero. Aspernatur,
-                        voluptates veniam? Atque.
-                    </div>
-                </div>
+                <!-- Комментарии -->
+                {%include '../block/comments.html'%}
             </div>
-            <div class="col-md-4">
-                <div class="card my-4">
-                    <h5 class="card-header">Тэги</h5>
-                    <div class="card-body">
-                        <div class="d-flex flex-wrap">
-                            <a href="#" class="m-2 h5 text-primary">#Тэг1</a>
-                            <a href="#" class="m-2 h5 text-primary">#Тэг2</a>
-                            <a href="#" class="m-2 h5 text-primary">#Тэг3</a>
-                            <a href="#" class="m-2 h5 text-primary">#Тэг4</a>
-                            <a href="#" class="m-2 h5 text-primary">#Тэг5</a>
-                            <a href="#" class="m-2 h5 text-primary">#Тэг6</a>
-                            <a href="#" class="m-2 h5 text-primary">#Тэг7</a>
-                            <a href="#" class="m-2 h5 text-primary">#Тэг8</a>
-                            <a href="#" class="m-2 h5 text-primary">#Тэг9</a>
-                            <a href="#" class="m-2 h5 text-primary">#Тэг10</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="card my-4">
-                    <h5 class="card-header">Последние публикации</h5>
-                    <div class="card-body">
-                        <h4 class="card-title">Заголовок поста1</h4>
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, ipsum error!
-                            Doloremque repellendus unde quam at ratione dignissimos illum, architecto molestiae
-                            totam deserunt quisquam praesentium!
-                        </p>
-                        <a href="#" class="card-link">Читать пост</a>
-                    </div>
-                    <hr>
-                    <div class="card-body">
-                        <h4 class="card-title">Заголовок поста2</h4>
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, ipsum error!
-                            Doloremque repellendus unde quam at ratione dignissimos illum, architecto molestiae
-                            totam deserunt quisquam praesentium!
-                        </p>
-                        <a href="#" class="card-link">Читать пост</a>
-                    </div>
-                    <hr>
-                    <div class="card-body">
-                        <h4 class="card-title">Заголовок поста3</h4>
-                        <p class="card-text">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, ipsum error!
-                            Doloremque repellendus unde quam at ratione dignissimos illum, architecto molestiae
-                            totam deserunt quisquam praesentium!
-                        </p>
-                        <a href="#" class="card-link">Читать пост</a>
-                    </div>
-                </div>
+            <!-- Правая колонка -->
+            <div class="col-lg-4">
+                {%include '../block/aside.html'%}
             </div>
         </div>
     </div>

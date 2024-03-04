@@ -1,31 +1,31 @@
-{%extends 'blog/base.html'%}
+{%extends 'base.html'%}
 {%block title%}Главная{%endblock%}
 {%block content%}
 <section class="list-posts">
     <div class="container">
-        {%if posts%}
+        {%if page_obj.number == 1 %}
         <h1 class="my-4 text-center">Последние записи</h1>
+        {%elif page_obj.number >= 1%}
+        <h1 class="my-4 text-center">Список публикаций</h1>
         {%endif%}
-        {%if posts.count == 1%}
+        {%if page_obj.paginator.per_page < 3%}
         <div class="row justify-content-center">
-            {%else%}
-            <div class="row">
-                {%endif%}
-                {%for post in posts%}
-                {%if posts.count == 1%}
-                <div class="col-md-6">
-                    {%elif posts.count == 2%}
-                    <div class="col-md-6">
-                        {%else%}
-                        <div class="col-md-4">
+        {%else%}
+        <div class="row">
+        {%endif%}
+        {%for post in page_obj%}
+        {%if page_obj.paginator.per_page < 3%}
+        <div class="col-md-6">
+        {%else%}
+        <div class="col-md-4">
                             {%endif%}
                             <div class="card mb-4 shadow-sm">
                                 {%if post.images.all.count != 0 %}
-                                <img src="{{post.images.first.image.url}}" class="card-img-top">
+                                <img src="{{post.image.url}}" class="card-img-top">
                                 {%endif%}
                                 <div class="card-body">
                                     <h4 class="card-title">{{post.title}}</h4>
-                                    <p class="card-text">{{post.text}}</p>
+                                    <p class="card-text">{{post.descriptive|safe|truncatechars:100}}</p>
                                     <div class="d-flex justify-content-between align-items-center">
                                         <div class="btn-group">
                                             <a href="{{post.get_absolute_url}}"

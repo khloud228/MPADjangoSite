@@ -1,0 +1,45 @@
+{%extends 'base.html'%}
+{%block title%}Обратная связь{%endblock%}
+{%block content%}
+<section class="my-contact-form">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <nav aria-label="breadcrumb" class="my-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{%url 'blog:main'%}">Главная</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Форма обратной связи</li>
+                    </ol>
+                </nav>
+                <div class="row justify-content-center">
+                    <div class="col-md-6">
+                        <p class="lead">Чтобы связаться со мной заполните форму обратной связи</p>
+                        <form name="form-contact" action="." method="post">
+                            {%csrf_token%}
+                            {%if form.non_field_errors%}
+                            <div class="alert alert-danger mt-1">
+                                {{form.non_field_errors}}
+                            </div>
+                            {%endif%}
+                            {%for field in form%}
+                            <div class="mb-3">
+                                <label for="field.auto_id" class="form-label visually-hidden">{{field.label}}</label>
+                                {{field}}
+                                {%if field.errors%}
+                                <div class="alert alert-danger mt-1">
+                                    {{field.errors}}
+                                </div>
+                                {%endif%}
+                            </div>
+                            {%endfor%}
+                            <div class="text-center text-md-start my-3">
+                                <button class="btn btn-primary" type="submit">Отправить</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{%endblock%}
