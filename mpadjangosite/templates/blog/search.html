@@ -1,0 +1,36 @@
+{%extends 'base.html'%}
+{%block title%}Поиск{%endblock%}
+{%block content%}
+<section class="my-search-form">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav aria-label="breadcrumb" class="my-4">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{%url 'blog:main'%}">Главная</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Поиск</li>
+                    </ol>
+                </nav>
+                {%if page_obj%}
+                <p class="lead">Найдено записей: {{page_obj.paginator.count}}</p>
+                {%for post in page_obj%}
+                <a href="{{post.get_absolute_url}}">
+                    <h2>{{post.title}}</h2>
+                </a>
+                <p>{{post.descriptive|safe}}</p>
+                {% for tag in post.tag.all %}
+                <a href="{%url 'blog:tag' tag.slug%}" class="badge bg-info text-dark mb-2">#{{ tag }}</a>
+                {% endfor %}
+                <hr>
+                {%endfor%}
+                {%else%}
+                <p class="lead">Публикаций не найдено.</p>
+                {%endif%}
+            </div>
+        </div>
+    </div>
+</section>
+{%endblock%}
+{%block pagination%}
+{%include '../block/pagination.html'%}
+{%endblock%}

@@ -1,4 +1,5 @@
 {%load static%}
+{%load users_extras%}
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -12,7 +13,7 @@
 </head>
 
 <body>
-    {%include 'block/navbar.html'%}
+    {%show_navbar_with_search_form request tag_slug%}
     {%block content%}{%endblock%}
     {%block pagination%}{%endblock%}
     {%include 'block/footer.html'%}

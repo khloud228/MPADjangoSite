@@ -10,6 +10,6 @@ class PostAdmin(admin.ModelAdmin):
         "created_date",
         "last_modified",
         "published",
-        "tag"
+        # "tag"
     )
     prepopulated_fields = {"slug": ("title",)}

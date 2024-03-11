@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.urls import reverse
 from ckeditor_uploader.fields import RichTextUploadingField
+from taggit.managers import TaggableManager
 
 
 class Post(models.Model):
@@ -23,10 +24,13 @@ class Post(models.Model):
         auto_now=True, verbose_name="Дата последнего изменения"
     )
     published = models.BooleanField(default=True, verbose_name="Опубликован")
-    tag = models.CharField(max_length=200, verbose_name="Тэг")
+    tag = TaggableManager()
 
     def get_absolute_url(self):
         return reverse("blog:detail", kwargs={"slug": self.slug})
+
+    # def get_tag_url(self):
+    #     return reverse('blog:tag', kwargs={'slug': tag})
 
     def __str__(self):
         return self.title
@@ -34,3 +38,4 @@ class Post(models.Model):
     class Meta:
         verbose_name = "Публикация"
         verbose_name_plural = "Публикации"
+        ordering = ('-created_date',)

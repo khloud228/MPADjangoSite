@@ -8,39 +8,36 @@
         {%elif page_obj.number >= 1%}
         <h1 class="my-4 text-center">Список публикаций</h1>
         {%endif%}
-        {%if page_obj.paginator.per_page < 3%}
-        <div class="row justify-content-center">
-        {%else%}
-        <div class="row">
-        {%endif%}
-        {%for post in page_obj%}
-        {%if page_obj.paginator.per_page < 3%}
-        <div class="col-md-6">
-        {%else%}
-        <div class="col-md-4">
-                            {%endif%}
-                            <div class="card mb-4 shadow-sm">
-                                {%if post.images.all.count != 0 %}
-                                <img src="{{post.image.url}}" class="card-img-top">
-                                {%endif%}
-                                <div class="card-body">
-                                    <h4 class="card-title">{{post.title}}</h4>
-                                    <p class="card-text">{{post.descriptive|safe|truncatechars:100}}</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <div class="btn-group">
-                                            <a href="{{post.get_absolute_url}}"
-                                                class="btn btn-sm btn-outline-secondary">Подробнее</a>
-                                        </div>
-                                        <small class="text-muted">{{post.created_date}}</small>
+        {%if page_obj.paginator.per_page < 3%} <div class="row justify-content-center">
+            {%else%}
+            <div class="row">
+                {%endif%}
+                {%for post in page_obj%}
+                {%if page_obj.paginator.per_page < 3%} <div class="col-md-6">
+                    {%else%}
+                    <div class="col-md-4">
+                        {%endif%}
+                        <div class="card mb-4 shadow-sm">
+                            <img src="{{post.image.url}}" class="card-img-top">
+                            <div class="card-body">
+                                <h4 class="card-title">{{post.title}}</h4>
+                                <p class="card-text">{{post.descriptive|safe|truncatechars:100}}</p>
+                                {% for tag in post.tag.all %}
+                                <a href="{%url 'blog:tag' tag.slug%}" class="badge bg-info text-dark mb-2">#{{ tag }}</a>
+                                {% endfor %}
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a href="{{post.get_absolute_url}}"
+                                            class="btn btn-sm btn-outline-secondary">Подробнее</a>
                                     </div>
+                                    <small class="text-muted">{{post.created_date}}</small>
                                 </div>
                             </div>
                         </div>
-                        {%empty%}
-                        <h1 class="my-4 text-center">Записей нет.</h1>
-                        {%endfor%}
                     </div>
-                </div>
+                    {%endfor%}
+            </div>
+    </div>
 </section>
 {%endblock%}
 {%block pagination%}

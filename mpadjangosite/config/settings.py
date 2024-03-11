@@ -25,7 +25,9 @@ SECRET_KEY = "django-insecure-*e@qsi_r_3)nn%x-($xcu9!pusxo_s9s3*%bg*3t+6u$f$4l@l
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*'
+]
 
 
 # Application definition
@@ -39,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'ckeditor',
     'ckeditor_uploader',
+    'taggit',
     "source.accounts",
     "source.blog",
 ]
