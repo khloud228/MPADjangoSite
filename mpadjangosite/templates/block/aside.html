@@ -1,49 +1,31 @@
+{%if common_tags%}
 <div class="card my-4">
     <h5 class="card-header">Тэги</h5>
     <div class="card-body">
         <div class="d-flex flex-wrap">
-            <a href="#" class="m-2 h5 text-primary">#Тэг1</a>
-            <a href="#" class="m-2 h5 text-primary">#Тэг2</a>
-            <a href="#" class="m-2 h5 text-primary">#Тэг3</a>
-            <a href="#" class="m-2 h5 text-primary">#Тэг4</a>
-            <a href="#" class="m-2 h5 text-primary">#Тэг5</a>
-            <a href="#" class="m-2 h5 text-primary">#Тэг6</a>
-            <a href="#" class="m-2 h5 text-primary">#Тэг7</a>
-            <a href="#" class="m-2 h5 text-primary">#Тэг8</a>
-            <a href="#" class="m-2 h5 text-primary">#Тэг9</a>
-            <a href="#" class="m-2 h5 text-primary">#Тэг10</a>
+            {%for tag in common_tags%}
+            <a href="{%url 'blog:tag' tag.slug%}" class="m-2 h5 text-primary">{{tag}}</a>
+            {%endfor%}
         </div>
     </div>
 </div>
+{%endif%}
+{%if related_posts%}
 <div class="card my-4">
-    <h5 class="card-header">Последние публикации</h5>
-    <div class="card-body">
-        <h4 class="card-title">Заголовок поста1</h4>
-        <p class="card-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, ipsum error!
-            Doloremque repellendus unde quam at ratione dignissimos illum, architecto molestiae
-            totam deserunt quisquam praesentium!
-        </p>
-        <a href="#" class="card-link">Читать пост</a>
+    <h5 class="card-header">Похожие публикации</h5>
+    {%for post in related_posts%}
+    <div class="list-group list-group-flush">
+        <div class="card-body">
+            <h4 class="card-title">{{post.title}}</h4>
+            <p class="card-text">{{post.descriptive|safe}}</p>
+            <div class="d-flex justify-content-end">
+                {% for tag in post.tag.all %}
+                <a href="{%url 'blog:tag' tag.slug%}" class="badge bg-info text-dark mb-2 me-2">#{{ tag }}</a>
+                {% endfor %}
+            </div>
+            <a href="{{post.get_absolute_url}}" class="card-link">Читать пост</a>
+        </div>
     </div>
-    <hr>
-    <div class="card-body">
-        <h4 class="card-title">Заголовок поста2</h4>
-        <p class="card-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, ipsum error!
-            Doloremque repellendus unde quam at ratione dignissimos illum, architecto molestiae
-            totam deserunt quisquam praesentium!
-        </p>
-        <a href="#" class="card-link">Читать пост</a>
-    </div>
-    <hr>
-    <div class="card-body">
-        <h4 class="card-title">Заголовок поста3</h4>
-        <p class="card-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia, ipsum error!
-            Doloremque repellendus unde quam at ratione dignissimos illum, architecto molestiae
-            totam deserunt quisquam praesentium!
-        </p>
-        <a href="#" class="card-link">Читать пост</a>
-    </div>
+    {%endfor%}
 </div>
+{%endif%}

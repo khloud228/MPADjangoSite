@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 
+from .models import Comment
 
 class ContactForm(forms.ModelForm):
     subject = forms.CharField(max_length=200, label='Тема', widget=forms.TextInput(attrs={
@@ -31,3 +32,19 @@ class SearchForm(forms.Form):
         'type': 'search',
         'placeholder': 'Поиск'
     }))
+
+
+class CommentForm(forms.ModelForm):
+    text = forms.CharField(label='Содержимое', widget=forms.Textarea(attrs={
+        'class': 'form-control mb-3',
+        'rows': 3
+    }))
+    class Meta:
+        model = Comment
+        fields = ('text',)
+        # widgets = {
+        #     'text': forms.Textarea(attrs={
+        #         'class': 'form-control mb-3',
+        #         'rows': 3
+        #     })
+        # }
