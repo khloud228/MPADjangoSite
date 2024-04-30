@@ -1,3 +1,7 @@
+# spadjangosite
+
+после установки зависимостей из файла requiremens.txt внутри папки виртуального окружения зайти в lib/site-packages/taggit_serializer/serializers.py и в импорте ugettext_lazy заменить на gettext_lazy
+
 # nuxtjs_blog
 
 ## Build Setup
