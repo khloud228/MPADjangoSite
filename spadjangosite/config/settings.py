@@ -152,6 +152,7 @@ REST_FRAMEWORK = {
     # "DEFAULT_RENDERER_CLASSES": ["rest_framework.renderers.JSONRenderer"],
     "TEST_REQUEST_DEFAULT_FORMAT": "json",
     "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.DjangoModelPermissions",),
+    'DATETIME_FORMAT': "%d.%m.%Y"
 }
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
