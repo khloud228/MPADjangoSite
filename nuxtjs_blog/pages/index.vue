@@ -9,8 +9,11 @@
               <div class="card-body">
                 <h4 class="card-title">{{ post.title }}</h4>
                 <p v-html="post.description" class="card-text"></p>
+                <span v-for="tag in post.tags">
+                  <nuxt-link :to="`/tags/${tag}`" class="mr-1 badge badge-info">#{{ tag }}</nuxt-link>
+                </span>
                 <div class="d-flex justify-content-between align-items-center">
-                  <nuxt-link to="#" class="btn btn-sm btn-outline-secondary">Подробнее</nuxt-link>
+                  <nuxt-link :to="`/posts/${post.slug}`" class="btn btn-sm btn-outline-secondary">Подробнее</nuxt-link>
                   <small class="text-muted">{{ post.created_date }}</small>
                 </div>
               </div>
